@@ -14,10 +14,10 @@ int main(int argc, char *argv[]) {
     FILE *f = fopen(argv[1], "r");
     // In the context of reading data from a file, we typically use uint8_t because file data is usually interpreted as unsigned bytes. This is especially true when dealing with binary files, like images, where negative values don't make sense.
     uint8_t buffer[BLOCK];
-    // While there's still data left to read from the memory card
     int counter = 0;
     FILE *img = NULL;
     char fileName[8];
+    // While there's still data left to read from the memory card
     while(fread(&buffer, 1, BLOCK, f) != 0) {
         if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xe0) == 0xe0) {
             sprintf(fileName, "%03i.jpg", counter);
